@@ -1,6 +1,8 @@
 import { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import CardList from './components/cardList/cardList.component';
+import SearchBox from './components/searchBox/searchBox.component';
 
 class App extends Component {
   constructor() {
@@ -34,8 +36,8 @@ class App extends Component {
 
   async componentDidMount() {
     const users = await (await fetch('https://jsonplaceholder.typicode.com/users')).json();
-    this.setState({ monsters: users, 
-      // filteredMonsters: users 
+    this.setState({ monsters: users,
+      // filteredMonsters: users
     });
   }
 
@@ -76,7 +78,7 @@ class App extends Component {
       //         console.log(2, this.state);
       //       });
       //       console.log(3, this.state);
-            
+
       //     }}>Change Name</button>
       //     {/* <p>
       //       Edit <code>src/App.js</code> and save to reload.
@@ -109,10 +111,8 @@ class App extends Component {
       // </div>
 
       <div className='App'>
-        <input className='search-box' type='search' placeholder='search monsters' onChange={this.onSearch} />
-        {
-          filteredMonsters.map(monster => <div key={monster.id}><h1>{monster.name}</h1></div>)
-        }
+        <SearchBox className='search-box' placeholder='search monsters' onSearchHandler={this.onSearch} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
